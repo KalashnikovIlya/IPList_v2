@@ -57,11 +57,11 @@ public class IPList {
 
     private long getDecimalAddress(String address){
         final String POINT = ".";
-        address = address + POINT;
         StringBuilder segment = new StringBuilder("0");
-        long decimalAddress = 0;
         int degree = 3;
+        long decimalAddress = 0;
 
+        address = address + POINT;
         for(int i = 0; i < address.length(); i++){
             if(POINT.equals(address.substring(i, i + 1))){
                 decimalAddress = (long) (decimalAddress + Integer.parseInt(segment.toString()) * (Math.pow(256, degree)));
