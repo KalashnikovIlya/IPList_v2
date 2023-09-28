@@ -65,18 +65,18 @@ public class Main {
     public static long getDecimalAddr(String address){
         final String POINT = ".";
         address = address + POINT;
-        String segment = "0";
+        StringBuilder segment = new StringBuilder("0");
         long decimalAddress = 0;
         int degree = 3;
 
         for(int i = 0; i < address.length(); i++){
             if(POINT.equals(address.substring(i, i + 1))){
-                decimalAddress = (long) (decimalAddress + Integer.parseInt(segment) * (Math.pow(256, degree)));
+                decimalAddress = (long) (decimalAddress + Integer.parseInt(segment.toString()) * (Math.pow(256, degree)));
                 degree--;
-                segment = "0";
+                segment = new StringBuilder("0");
             }
             else {
-                segment = segment + address.substring(i, i + 1);
+                segment.append(address.charAt(i));
             }
         }
         return decimalAddress;
