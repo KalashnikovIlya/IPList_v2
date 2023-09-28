@@ -43,15 +43,14 @@ public class Main {
     }
 
     public static void getAddressList (long decimalAddressA, long decimalAddressB){
-        long integerFromDivision = 0;
         for(long i = ++decimalAddressA; i < decimalAddressB; i++){
-            String outputAddress = "." + String.valueOf(i% 256);
-            integerFromDivision = i / 256;
-            outputAddress = "." + String.valueOf(integerFromDivision% 256) + outputAddress;
+            String outputAddress = "." + i% 256;
+            long integerFromDivision = i / 256;
+            outputAddress = "." + integerFromDivision% 256 + outputAddress;
             integerFromDivision = integerFromDivision / 256;
-            outputAddress = "." + String.valueOf(integerFromDivision% 256) + outputAddress;
+            outputAddress = "." + integerFromDivision% 256 + outputAddress;
             integerFromDivision = integerFromDivision / 256;
-            outputAddress = String.valueOf(integerFromDivision% 256) + outputAddress;
+            outputAddress = integerFromDivision% 256 + outputAddress;
             System.out.println(outputAddress);
         }
     }
