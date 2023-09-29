@@ -30,7 +30,6 @@ public interface IPv4Interface {
         outputAddress = "." + integerFromDivision% 256 + outputAddress;
         integerFromDivision = integerFromDivision / 256;
         outputAddress = integerFromDivision% 256 + outputAddress;
-        System.out.println(outputAddress);
         return outputAddress;
     };
 

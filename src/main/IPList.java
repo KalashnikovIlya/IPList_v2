@@ -43,6 +43,7 @@ public class IPList {
         for(long i = ++decimalAddress1; i < decimalAddress2; i++){
             IPv4Address ip = new IPv4Address();
             ip.addDecimalAddress(i);
+            System.out.println(ip.normalAddress);
         }
     }
 
