@@ -6,7 +6,7 @@ public class Main {
         IPList iplist = new IPList();
 
         System.out.println("Введите два IP адреса");
-        iplist.inputAddress();
+        iplist.inputTwoAddress();
 
         System.out.println("Список IP адресов");
         iplist.getAddressList();

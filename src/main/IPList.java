@@ -1,85 +1,57 @@
 package main;
 
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class IPList {
 
-    private long decimalAddressA;
-    private long decimalAddressB;
+    IPv4Address ip1 = new IPv4Address();
+    IPv4Address ip2 = new IPv4Address();
+    Scanner in = new Scanner(System.in);
 
-    public void inputAddress(){
+    private long decimalAddress1;
+    private long decimalAddress2;
+
+    public void inputTwoAddress(){
         System.out.println("первый IP");
-        decimalAddressA = getDecimalAddress(inAdd());
+        while (true){
+            if (ip1.addNormalAddress(in.next())){
+                break;
+            }
+            else {
+                System.out.println("Повторите ввод");
+            }
+        }
+
+        decimalAddress1 = ip1.decimalAddress;
+
         System.out.println("второй IP");
-        decimalAddressB = getDecimalAddress(inAdd());
+        while (true){
+            if (ip2.addNormalAddress(in.next())){
+                break;
+            }
+            else {
+                System.out.println("Повторите ввод");
+            }
+        }
+
+        decimalAddress2 = ip2.decimalAddress;
+
         swap();
     }
 
     public void getAddressList (){
-        for(long i = ++decimalAddressA; i < decimalAddressB; i++){
-            String outputAddress = "." + i% 256;
-            long integerFromDivision = i / 256;
-            outputAddress = "." + integerFromDivision% 256 + outputAddress;
-            integerFromDivision = integerFromDivision / 256;
-            outputAddress = "." + integerFromDivision% 256 + outputAddress;
-            integerFromDivision = integerFromDivision / 256;
-            outputAddress = integerFromDivision% 256 + outputAddress;
-            System.out.println(outputAddress);
+        for(long i = ++decimalAddress1; i < decimalAddress2; i++){
+            IPv4Address ip = new IPv4Address();
+            ip.addDecimalAddress(i);
+            System.out.println(ip.normalAddress + "фыва");
         }
-    }
-
-    private String inAdd(){
-        Scanner in = new Scanner(System.in);
-        String address;
-        while(true){
-            address = in.next();
-            if (checkAddress(address)){
-                break;
-            }
-            else{
-                System.out.println("Некорректный адрес");
-            }
-        }
-        return address;
-    }
-
-    private boolean checkAddress(String address){
-        String regex = "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\." +
-                        "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(address);
-        return matcher.matches();
-    }
-
-    private long getDecimalAddress(String address){
-        final String POINT = ".";
-        StringBuilder segment = new StringBuilder("0");
-        int degree = 3;
-        long decimalAddress = 0;
-
-        address = address + POINT;
-        for(int i = 0; i < address.length(); i++){
-            if(POINT.equals(address.substring(i, i + 1))){
-                decimalAddress = (long) (decimalAddress + Integer.parseInt(segment.toString()) * (Math.pow(256, degree)));
-                degree--;
-                segment = new StringBuilder("0");
-            }
-            else {
-                segment.append(address.charAt(i));
-            }
-        }
-        return decimalAddress;
     }
 
     private void swap(){
-        if (decimalAddressA > decimalAddressB) {
-            long temp = decimalAddressA;
-            decimalAddressA = decimalAddressB;
-            decimalAddressB = temp;
+        if (decimalAddress1 > decimalAddress2) {
+            long temp = decimalAddress1;
+            decimalAddress1 = decimalAddress2;
+            decimalAddress2 = temp;
         }
     }
 }
